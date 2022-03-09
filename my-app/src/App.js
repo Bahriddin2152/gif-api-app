@@ -28,12 +28,12 @@ function App() {
       let res;
       if (search.trim().length !== 0) {
         res = await fetch(
-          `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=3YnqyDf7vUiCcGxPYHcLKua8BS5mSG2r&limit=12`
+          `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=3YnqyDf7vUiCcGxPYHcLKua8BS5mSG2r&limit=25`
         );
       }
       if (search.trim().length === 0) {
         res = await fetch(
-          "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=3YnqyDf7vUiCcGxPYHcLKua8BS5mSG2r&limit=12"
+          "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=3YnqyDf7vUiCcGxPYHcLKua8BS5mSG2r&limit=25"
         );
       }
 
