@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import classes from "./Form.module.css";
 
 const Form = (props) => {
-  const [value, setValue] = useState("");
   const { searchFunc } = props;
   const inputRef = useRef();
 
