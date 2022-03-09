@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
-import Container from "./components/UI/Container/Container";
-import Row from "./components/UI/Row/Row";
+import Container from "./UI/Container/Container";
+import Row from "./UI/Row/Row";
 import AllGif from "./components/AllGif/AllGif";
 import Form from "./components/Form/Form";
 
@@ -8,7 +8,7 @@ const initialData = [];
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCHING":\
+    case "FETCHING":
       return action.value;
 
     default:
