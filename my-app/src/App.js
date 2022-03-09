@@ -8,7 +8,7 @@ const initialData = [];
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCHING":
+    case "FETCHING":\
       return action.value;
 
     default:
