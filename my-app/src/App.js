@@ -1,24 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useReducer } from "react";
+import Container from "./components/UI/Container/Container";
+import Row from "./components/UI/Row/Row";
+import AllGif from "./components/AllGif/AllGif";
+import Form from "./components/Form/Form";
 
+const initialData = [];
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "FETCHING":
+      return action.value;
+
+    default:
+      return state;
+  }
+};
 function App() {
+  const [data, dispatch] = useReducer(reducer, initialData);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, [search]);
+
+  async function fetchData() {
+    try {
+      let res;
+      if (search.trim().length !== 0) {
+        res = await fetch(
+          `http://api.giphy.com/v1/gifs/search?q=${search}&api_key=3YnqyDf7vUiCcGxPYHcLKua8BS5mSG2r&limit=12`
+        );
+      }
+      if (search.trim().length === 0) {
+        res = await fetch(
+          "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=3YnqyDf7vUiCcGxPYHcLKua8BS5mSG2r&limit=12"
+        );
+      }
+
+      if (!res.ok) {
+        throw new Error("Wrong something");
+      }
+      const fetchData = await res.json();
+      dispatch({ type: "FETCHING", value: fetchData.data });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  function searchFunc(value) {
+    setSearch((prevState) => (prevState = value));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Form searchFunc={searchFunc} />
+      <Row>
+        <AllGif data={data} />
+      </Row>
+    </Container>
   );
 }
 
